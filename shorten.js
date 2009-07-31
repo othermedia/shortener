@@ -2,13 +2,6 @@
  * bit.ly access library code.
  */
 var Shortener = new JS.Singleton('Shortener', {
-  initialize: function() {
-    this.extend({
-      CLIENT:    BitlyClient || null,
-      NAMESPACE: BitlyCB     || null
-    });
-  },
-  
 	shorten: function() {
 	  var uri, callback;
 	  
@@ -54,5 +47,8 @@ var Shortener = new JS.Singleton('Shortener', {
 		return name;
 	},
 	
-	callbackCount: 0
+	callbackCount: 0,
+	
+	CLIENT:        BitlyClient || null,
+  NAMESPACE:     BitlyCB     || null
 });
