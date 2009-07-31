@@ -29,7 +29,7 @@ var Shortener = new JS.Singleton('Shortener', {
 			break;
     }
 		
-		callback(result);
+		callback(result, data);
 	},
 	
 	_registerCallback: function(callback) {
