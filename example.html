@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>bit.ly API test</title>
+	
+	<script type="text/javascript" src="http://cdn.othermedia.com/ojay-yui/2.7.0.js"></script>
+	<script type="text/javascript" src="http://cdn.othermedia.com/ojay/0.4.1/all-min.js"></script>
+	<script type="text/javascript" src="http://bit.ly/javascript-api.js?version=latest&amp;login=beastaugh&amp;apiKey=R_122bee69be75314f67574cf9deab50a7"></script>
+	<script type="text/javascript" src="shorten.js"></script>	
+	
+</head><body>
+	
+	<h1>bit.ly API example</h1>
+	
+	<p>
+		This example demonstrates how to use the bit.ly API to shorten the current
+		page&#8217;s URI for use on Twitter, calling the bit.ly
+		<code>shorten</code> method only when the link is clicked.
+	</p>
+	
+	<p>
+		<a id="twitter_link" href="http://twitter.com/home">
+			Tweet about this page &rsaquo;
+		</a>
+	</p>
+	
+	<script type="text/javascript">
+		Ojay('#twitter_link').on('click', function(el, ev) {
+			ev.stopDefault();
+			
+			Shortener.shorten(function(result) {
+				Ojay.HTTP.GET.redirectTo(el.node.href, {
+					status: 'Currently reading a bit.ly API example on ' + result.shortUrl
+				});
+			});
+		});
+	</script>
+	
+</body></html>

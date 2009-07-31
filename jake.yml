@@ -7,6 +7,5 @@ builds:
     shrink_vars:    true
     private:        true
 packages:
-  widget:
-    - widget
-
+  shorten:
+    - shorten
