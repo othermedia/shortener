@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>bit.ly API test</title>
+    
+    <script type="text/javascript">
+    JSCLASS_PATH = 'http://localhost:9292/js/js.class/2.1.x/build/min';</script>
+    
+    <script src="http://localhost:9292/js/js.class/2.1.x/build/min/loader.js" type="text/javascript"></script>
+    <script src="http://localhost:9292/js/packages.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+    Helium.use('yui', '2.7.0');
+    Helium.use('ojay', 'master');
+    
+    Helium.BITLY_API_KEY = 'R_0da49e0a9118ff35f52f629d2d71bf07';
+    Helium.BITLY_API_LOGIN = 'bitlyapidemo';
+    </script>
+    
+    <!-- Package file for shortener (run `jake` to generate this) -->
+    <script src="./packages.js" type="text/javascript"></script>
+  </head>
+  <body>
+    
+    <h1>bit.ly API example</h1>
+	
+	  <p>This example demonstrates how to use the <a href="http://code.google.com/p/bitly-api/wiki/JavascriptClientApiDocumentation">bit.ly API</a> to shorten the current page&#8217;s URI for use on Twitter, calling the bit.ly <code>shorten</code> method only when the link is clicked.</p>
+	
+	  <p><a id="twitter_link" href="http://twitter.com/home">Tweet about this page &rsaquo;</a></p>
+	  
+    <script type="text/javascript">
+    require('Ojay', 'Ojay.HTTP', 'Shortener', function() {
+        
+        Ojay('#twitter_link').on('click', function(el, ev) {
+			    ev.stopDefault();
+			
+			    Shortener.shorten(function(result) {
+				    Ojay.HTTP.GET.redirectTo(el.node.href, {
+					    status: 'Currently reading a bit.ly API example on ' + result.shortUrl
+				    });
+			    });
+		    });
+    });
+    </script>
+    
+  </body>
+</html>

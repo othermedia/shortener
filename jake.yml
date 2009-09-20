@@ -8,4 +8,13 @@ builds:
     private:        true
 packages:
   shorten:
-    - shorten
+    files:
+      - shorten
+    meta:
+      provides:
+        - Shortener
+      requires:
+        - JS.Singleton
+        - BitlyClient
+        - BitlyCB
+

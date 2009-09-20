@@ -6,6 +6,20 @@ URI shorteners these days is creating short URIs for posting to Twitter, so
 the Shortener wrapper focuses on shortening URIs rather than any of the other
 functionality that the bit.ly API provides.
 
+Add the following to your Helium setup for deployment:
+
+    /**
+     * Loads the bit.ly API. Requires `Helium.BITLY_API_LOGIN`
+     * and `Helium.BITLY_API_KEY` to be set beforehand.
+     **/
+    loader(function(cb) {
+        var url = 'http://bit.ly/javascript-api.js' +
+                  '?version=latest' +
+                  '&login=' + Helium.BITLY_API_LOGIN +
+                  '&apiKey=' + Helium.BITLY_API_KEY;
+        load(url, cb);
+    })  .provides('BitlyApiClient', 'BitlyClient', 'BitlyCB');
+
 
 Usage
 -----
