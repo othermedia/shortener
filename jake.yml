@@ -19,6 +19,5 @@ packages:
       provides:
         - Shortener
       requires:
-        - JS.Singleton
         - BitlyClient
         - BitlyCB

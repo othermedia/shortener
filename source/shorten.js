@@ -1,9 +1,11 @@
 /**
  * bit.ly access library code.
  */
-Shortener = new JS.Singleton('Shortener', {
+Shortener = {
+    displayName: 'Shortener',
+    
     shorten: function() {
-        var uri, callback;
+        var uri, callback, name;
       
         if (typeof arguments[0] == 'string') {
             uri      = arguments[0];
@@ -13,40 +15,42 @@ Shortener = new JS.Singleton('Shortener', {
             callback = arguments[0];
         }
         
-        var name = this._registerCallback(callback);
+        name = this._registerCallback(callback);
         
-        if (!(name && this.CLIENT)) return;
-        
-        this.CLIENT.call('shorten', {'longUrl': uri}, 'BitlyCB.' + name);
+        if (name && this.CLIENT) {
+            this.CLIENT.call('shorten', {'longUrl': uri}, 'BitlyCB.' + name);
+        }
     },
     
     _dispatcher: function(callback, data) {
-        var result;
+        var result, p;
         
         // Results are keyed by longUrl, so we need to grab the first one.
-        for (var r in data.results) {
-            result = data.results[r];
+        for (p in data.results) {
+            result = data.results[p];
             break;
         }
         
-        callback(result, data);
+        callback.call(null, result, data);
     },
     
     _registerCallback: function(callback) {
         if (!this.NAMESPACE) return false;
         
-        var name = 'abbr' + this.callbackCount;
+        var name = 'abbr' + this.callbackCount,
+            self = this;
+        
         this.callbackCount += 1;
         
         this.NAMESPACE[name] = function(data) {
-            this._dispatcher(callback, data);
-        }.bind(this);
+            self._dispatcher(callback, data);
+        };
         
         return name;
     },
     
     callbackCount: 0,
     
-    CLIENT:        BitlyClient || null,
-    NAMESPACE:     BitlyCB     || null
-});
+    CLIENT:        BitlyClient,
+    NAMESPACE:     BitlyCB
+};
