@@ -51,6 +51,6 @@ Shortener = {
     
     callbackCount: 0,
     
-    CLIENT:        BitlyClient,
-    NAMESPACE:     BitlyCB
+    CLIENT:        window.BitlyClient || null,
+    NAMESPACE:     window.BitlyCB     || null
 };

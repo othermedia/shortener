@@ -1,3 +1,7 @@
+2010.08.24, Version 1.0.1
+
+* Ensure errors aren't thrown if the bit.ly API objects aren't available.
+
 2010.08.24, Version 1.0.0
 
 * Lightweight wrapper around the bit.ly API for shortening URIs.
