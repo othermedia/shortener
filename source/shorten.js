@@ -28,7 +28,7 @@ Shortener = {
         // Results are keyed by longUrl, so we need to grab the first one.
         for (p in data.results) {
             result = data.results[p];
-            break;
+            if (typeof result == 'object') break;
         }
         
         callback.call(null, result, data);
