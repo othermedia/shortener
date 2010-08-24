@@ -34,9 +34,8 @@
                 ev.stopDefault();
                 
                 Shortener.shorten(function(result) {
-                    var params = result.statusCode == "ERROR" ? {} : {
-                        status: 'Currently reading a bit.ly API example on ' + result.shortUrl
-                    };
+                    var uri    = result.statusCode == "ERROR" ? window.location.href : result.shortUrl,
+                        params = {status: 'Currently reading a bit.ly API example on ' + uri};
                     
                     Ojay.HTTP.GET.redirectTo(el.node.href, params);
                 });
