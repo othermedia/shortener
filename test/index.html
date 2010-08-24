@@ -26,7 +26,7 @@
     <p><a id="twitter_link" href="http://twitter.com/home">
         Tweet about this page &rsaquo;
     </a></p>
-      
+    
     <script type="text/javascript">
         require('Ojay', 'Ojay.HTTP', 'Shortener', function() {
             
@@ -34,9 +34,11 @@
                 ev.stopDefault();
                 
                 Shortener.shorten(function(result) {
-                    Ojay.HTTP.GET.redirectTo(el.node.href, {
+                    var params = result.statusCode == "ERROR" ? {} : {
                         status: 'Currently reading a bit.ly API example on ' + result.shortUrl
-                    });
+                    };
+                    
+                    Ojay.HTTP.GET.redirectTo(el.node.href, params);
                 });
             });
         });
